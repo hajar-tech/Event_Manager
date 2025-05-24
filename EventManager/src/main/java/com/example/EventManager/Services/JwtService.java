@@ -27,7 +27,7 @@ public class JwtService {
 
     //methode can extrat a single claim that we post
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
+        final Claims claims = (Claims) extractAllClaims(token);
         return  claimsResolver.apply(claims);
     }
 
@@ -68,7 +68,7 @@ public class JwtService {
     }
 
     //methode to extrat the Claims
-    private Claims extractAllClaims(String token) {
+    public Map<String, Object> extractAllClaims(String token) {
         return Jwts
                 .parserBuilder()
                 .setSigningKey(getSignInKey())//Signinkey is a secret use to degitaly signe jwt
