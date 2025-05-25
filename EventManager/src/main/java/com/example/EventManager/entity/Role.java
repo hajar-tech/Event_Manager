@@ -1,4 +1,4 @@
-package com.example.EventManager.Models;
+package com.example.EventManager.entity;
 
 public enum Role {
     ADMIN,
