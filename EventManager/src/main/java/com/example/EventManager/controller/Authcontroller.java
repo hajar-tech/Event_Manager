@@ -63,6 +63,7 @@ public class Authcontroller {
         String username = loginRequest.get("username");
         String password = loginRequest.get("password");
 
+
         log.info("Login attempt for username: {}", username);
 
         if (username == null || password == null) {
@@ -76,11 +77,17 @@ public class Authcontroller {
             );
 
             if (authentication.isAuthenticated()) {
-                String token = jwtUtils.generateToken(username);
+                User user = userReposetory.findByUsername(username);
+                if(user == null) {
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Username not found");
+                }
+                String role = user.getRole();
+                String token = jwtUtils.generateToken(username , role);
 
                 Map<String, Object> authData = new HashMap<>();
                 authData.put("token", token);
                 authData.put("type", "Bearer");
+                authData.put("role", role);
 
                 log.info("Login successful for username: {}", username);
                 return ResponseEntity.ok(authData);
