@@ -20,6 +20,7 @@ public class User implements UserDetails {
     private String username;
     private String name;
     private String password;
+
     private String role;
 
     public int getId() {

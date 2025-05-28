@@ -57,6 +57,8 @@ public class Authcontroller {
         return ResponseEntity.ok(savedUser);
     }
 
+
+
     // Login endpoint
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> loginRequest) {
