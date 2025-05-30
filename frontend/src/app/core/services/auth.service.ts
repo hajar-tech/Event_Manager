@@ -11,10 +11,21 @@ export interface RegisterRequest{
   role : string;
 }
 
+export interface LoginRequest {
+  username: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  token: string;
+  type: string;
+  role: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterService {
+export class AuthService {
   private  apiUrl = 'http://localhost:8080/api/auth';
 
   constructor(private http : HttpClient) { }
@@ -24,6 +35,11 @@ export class RegisterService {
      .pipe(
        catchError(this.handleError)
      );
+  }
+
+  login(data : LoginRequest):Observable<LoginResponse>{
+    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, data)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse){
