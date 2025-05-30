@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {Router, RouterLink} from '@angular/router';
-import {RegisterRequest, RegisterService} from '../../core/services/register.service';
+import {RegisterRequest, AuthService} from '../../core/services/auth.service';
 import {response} from 'express';
 
 @Component({
@@ -17,7 +17,7 @@ export class RegisterComponent {
   errorMessage : string="";
   successMessage : string="";
 
-  constructor(private fb: FormBuilder, private authService : RegisterService , private router : Router) {
+  constructor(private fb: FormBuilder, private authService : AuthService , private router : Router) {
     this.registerForm = this.fb.group({
       name: ['', [Validators.required]],
       username: ['', [Validators.required, Validators.email]],
