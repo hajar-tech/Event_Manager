@@ -1,5 +1,9 @@
 <div class="register-container">
   <h2>Register</h2>
+
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
     <div class="form-group">
       <label for="name">Name</label>
@@ -50,8 +54,8 @@
       <label for="role">Role</label>
       <select id="role" formControlName="role" class="form-control">
         <option value="">Select a role</option>
-        <option value="client">Client</option>
-        <option value="admin">Admin</option>
+        <option value="Client">Client</option>
+        <option value="Admin">Admin</option>
       </select>
       <div *ngIf="registerForm.get('role')?.errors?.['required'] && registerForm.get('role')?.touched" class="error-message">
         Role is required
@@ -69,4 +73,4 @@
       </button>
     </div>
   </form>
-</div> 
+</div>
