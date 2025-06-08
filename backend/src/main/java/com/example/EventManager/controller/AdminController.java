@@ -4,6 +4,8 @@ import com.example.EventManager.dto.EventDto;
 import com.example.EventManager.entity.Event;
 import com.example.EventManager.mapper.EventMapper;
 import com.example.EventManager.repository.EventRepository;
+import com.example.EventManager.service.implementationServices.EventImpl;
+import com.example.EventManager.service.interfaceServices.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,11 +17,13 @@ public class AdminController {
 
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
+    private final EventImpl eventImpl;
 
     @Autowired
-    public AdminController(EventRepository eventRepository, EventMapper eventMapper) {
+    public AdminController(EventRepository eventRepository, EventMapper eventMapper , EventImpl eventImpl) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
+        this.eventImpl = eventImpl;
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -33,6 +37,13 @@ public class AdminController {
     public ResponseEntity<EventDto> createEvent(@RequestBody EventDto eventDTO) {
         Event saved = eventRepository.save(eventMapper.toEntity(eventDTO));
         return ResponseEntity.ok(eventMapper.toDTO(saved));
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/add")
+
+    public Event addEvent(@RequestBody Event event){
+        return eventImpl.addEvent(event);
     }
 
 //    @PostMapping("/create-event")
