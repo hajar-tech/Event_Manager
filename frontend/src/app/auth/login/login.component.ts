@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {AuthService} from '../../core/services/auth.service';
 import {response} from 'express';
 
@@ -36,7 +36,7 @@ export class LoginComponent {
           //rediriger l'utilisateur selon leur role
           if(response.role === 'Admin'){
             alert("welcome admin")
-            // this.router.navigate(['/admin-dashboard']);
+             this.router.navigate(['/admin-dashboard']);
           }else {
             alert("welcome client")
             // this.router.navigate(['user-dashboard']);
