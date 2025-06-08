@@ -1,0 +1,9 @@
+<h2>Welcome Admin!</h2>
+<!--<button mat-raised-button color="primary" (click)="showForm = !showForm">-->
+<!--  Create Event-->
+<!--</button>-->
+
+<!--<app-add-event *ngIf="showForm"></app-add-event>-->
+<!-- OR use a routerLink to a new page -->
+<button mat-raised-button [routerLink]="['/admin-dashboard/create-event']">Create Event</button>
+
