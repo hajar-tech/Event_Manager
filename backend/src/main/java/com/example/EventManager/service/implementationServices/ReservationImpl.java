@@ -29,14 +29,19 @@ public class ReservationImpl implements ReservationService {
         newReservation.setUserName(reservation.getUserName());
         newReservation.setNumberOfSeats(reservation.getNumberOfSeats());
 
-        Event event = new Event();
-        eventRepository.findById(event.getId()).orElseThrow(()-> new RuntimeException("Event not found"));
-        newReservation.setEvent(event);
+       Long eventId = reservation.getEvent().getId();
+       int userId = reservation.getUser().getId();
 
-        User user = new User();
-        userReposetory.findById(user.getId()).orElseThrow(()-> new RuntimeException("User Not Found"));
-        newReservation.setUser(user);
+       if(eventId == null || userId == -1) {
+           throw new IllegalArgumentException("Event id and User id are required");
+       }
 
+       Event event = eventRepository.findById(eventId).orElseThrow(()-> new RuntimeException("Event not found"));
+
+       User user = userReposetory.findById(userId).orElseThrow(()-> new RuntimeException("User not found"));
+
+       newReservation.setEvent(event);
+       newReservation.setUser(user);
         //mis à jour des places
 
         int checkNumPlace = event.getPlacesDisponibles() - reservation.getNumberOfSeats();
