@@ -32,6 +32,11 @@ export class LoginComponent {
         next: (response) => {
           localStorage.setItem('token', response.token);
           localStorage.setItem('role', response.role);
+          if (response.user) {
+            localStorage.setItem('user', JSON.stringify(response.user));
+          } else {
+            console.error("Le champ 'user' est manquant dans la réponse du backend.");
+          }
 
           //rediriger l'utilisateur selon leur role
           if(response.role === 'Admin'){
@@ -39,7 +44,7 @@ export class LoginComponent {
              this.router.navigate(['/admin-dashboard']);
           }else {
             alert("welcome client")
-            // this.router.navigate(['user-dashboard']);
+            this.router.navigate(['/client-dashboard']);
           }
         },
         error: (err)=>{

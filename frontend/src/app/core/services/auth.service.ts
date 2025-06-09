@@ -3,6 +3,14 @@ import {catchError, Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import * as http from 'node:http';
 
+export interface User {
+  id: number;
+  username: string;
+  name: string;
+  role: string;
+}
+
+
 
 export interface RegisterRequest{
   name: String;
@@ -20,6 +28,13 @@ export interface LoginResponse {
   token: string;
   type: string;
   role: string;
+  user: {
+    id: number;
+    username: string;
+    name:string;
+    role: string
+    // ajoute d'autres champs si ton backend les retourne
+  };
 }
 
 @Injectable({
