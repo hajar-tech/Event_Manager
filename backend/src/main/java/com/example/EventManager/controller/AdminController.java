@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/admin")
@@ -38,6 +40,12 @@ public class AdminController {
     public ResponseEntity<EventDto> createEvent(@RequestBody EventDto eventDTO) {
         Event saved = eventRepository.save(eventMapper.toEntity(eventDTO));
         return ResponseEntity.ok(eventMapper.toDTO(saved));
+    }
+
+    @GetMapping("/getEvents")
+    public ResponseEntity<List<Event>> getEvents() {
+        List<Event> events = eventImpl.getEvents();
+        return ResponseEntity.ok(events);
     }
 
     @PreAuthorize("hasRole('ADMIN')")

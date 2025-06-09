@@ -5,6 +5,8 @@ import com.example.EventManager.repository.EventRepository;
 import com.example.EventManager.service.interfaceServices.EventService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EventImpl implements EventService {
 
@@ -16,5 +18,10 @@ public class EventImpl implements EventService {
     @Override
     public Event addEvent(Event event) {
      return   eventRepository.save(event);
+    }
+
+    @Override
+    public List<Event> getEvents() {
+        return eventRepository.findAll();
     }
 }
