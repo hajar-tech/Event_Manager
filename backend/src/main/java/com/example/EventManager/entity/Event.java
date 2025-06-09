@@ -1,5 +1,6 @@
 package com.example.EventManager.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -20,6 +21,7 @@ public class Event {
 
     // Un événement peut avoir plusieurs réservations
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Reservation> reservations = new ArrayList<>();
 
 

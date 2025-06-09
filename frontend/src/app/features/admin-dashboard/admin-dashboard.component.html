@@ -1,9 +1,44 @@
-<h2>Welcome Admin!</h2>
-<!--<button mat-raised-button color="primary" (click)="showForm = !showForm">-->
-<!--  Create Event-->
-<!--</button>-->
+<!-- Admin Dashboard Container -->
+<div class="admin-dashboard" style="background-color: #F5F5F5; min-height: 100vh; padding: 32px;">
 
-<!--<app-add-event *ngIf="showForm"></app-add-event>-->
-<!-- OR use a routerLink to a new page -->
-<button mat-raised-button [routerLink]="['/admin-dashboard/create-event']">Create Event</button>
+  <!-- Header -->
+  <div class="dashboard-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+    <h2 style="color: #333; font-weight: 600;">🎉 Welcome, Admin!</h2>
+    <button mat-flat-button color="accent" [routerLink]="['/admin-dashboard/create-event']" style="background-color: #FFC107; color: #fff; padding: 1% ; border-radius: 4px">
+      <mat-icon>add</mat-icon>
+      Create New Event
+    </button>
+  </div>
 
+  <!-- Event Grid -->
+  <div class="event-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+    <mat-card *ngFor="let event of events" class="event-card"
+              style="box-shadow: 0 8px 16px rgba(103,58,183,0.15); border-radius: 16px; background: #FFFFFF;">
+
+      <mat-card-header>
+        <div mat-card-avatar
+             style="background: #673AB7; color: white; display: flex; align-items: center; justify-content: center;">
+          <mat-icon>event</mat-icon>
+        </div>
+        <mat-card-title style="color: #673AB7;">{{ event.titre }}</mat-card-title>
+        <mat-card-subtitle style="color: #757575;">{{ event.date | date:'fullDate' }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content style="color: #444;">
+        <p>{{ event.description }}</p>
+        <p><strong>📍 Location:</strong> {{ event.location }}</p>
+        <p><strong>🗂 Category:</strong> {{ event.category }}</p>
+        <p><strong>🪑 Available Seats:</strong> {{ event.placesDisponibles }}</p>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        <button mat-stroked-button color="primary" style="border-color: #673AB7; color: #FFFFFF; background-color: #673AB7; border-radius: 5px; padding: 4% ">
+          View Details
+        </button>
+
+      </mat-card-actions>
+
+    </mat-card>
+  </div>
+
+</div>
