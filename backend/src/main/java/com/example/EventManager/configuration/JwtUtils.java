@@ -28,9 +28,10 @@ public class JwtUtils {
     @Value("${app.expiration-time}")
     private Long expirationTime;
 
-    public String generateToken(String username, String role) {
+    public String generateToken(String username, String role , int userId) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", role);
+        claims.put("id", userId);
         return createToken(claims,username);
     }
 
