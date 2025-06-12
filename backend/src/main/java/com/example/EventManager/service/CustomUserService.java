@@ -26,7 +26,7 @@ public class CustomUserService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {//responsable de chercher un utilisateur depuis la base de données
         User user = userReposetory.findByUsername(username);
 
         if (user == null) {
