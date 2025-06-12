@@ -75,7 +75,7 @@ public class Authcontroller {
         }
 
         try {
-            Authentication authentication = authenticationManager.authenticate(
+            Authentication authentication = authenticationManager.authenticate(//pour authentifier l'utilisateur avec les identifiants
                     new UsernamePasswordAuthenticationToken(username, password)
             );
 
